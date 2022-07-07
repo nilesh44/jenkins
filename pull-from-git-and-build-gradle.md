@@ -112,5 +112,8 @@ BUILD SUCCESSFUL in 13s
 [Pipeline] End of Pipeline
 Finished: SUCCESS
  ```
+ # We can check that build is created in our local machine 
  
+ ![image](https://user-images.githubusercontent.com/44174633/177727999-dbf3cdba-31c3-4d28-a565-658f14eb44cb.png)
+
 
