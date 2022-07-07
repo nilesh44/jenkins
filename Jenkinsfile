@@ -27,7 +27,7 @@ pipeline {
     always{
       echo "always execute"
     }
-    failuer{
+    failure{
      echo "something has failed" 
     }
     success{
