@@ -22,4 +22,17 @@ pipeline {
 
   }
   
+  post{
+   
+    always{
+      echo "always execute"
+    }
+    failuer{
+     echo "something has failed" 
+    }
+    success{
+     echo "build successfull"  
+    }
+  }
+  
 }
