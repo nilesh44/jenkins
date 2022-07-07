@@ -5,11 +5,14 @@ pipeline {
   stages{
     
       stage("pull from git"){
+        steps{
        echo "stage1"
         git branch: 'main', url: 'https://github.com/nilesh44/coffee-customer.git'
+        }
    }
    
    stage("gradle build"){
+     steps{
        if(isUnix()){
            sh './gradlew clean build'
 
@@ -18,7 +21,7 @@ pipeline {
             bat 'gradlew.bat clean build'
            }
    } 
-  
+   }
    
 
   }
