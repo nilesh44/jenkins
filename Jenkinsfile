@@ -1,6 +1,9 @@
 pipeline {
 
   agent any 
+  environment {
+   NEW_VERSION = '1.0.1-SNAPSHOT' 
+  }
   
   stages{
     
@@ -8,7 +11,8 @@ pipeline {
         steps{
        echo "stage1"
        echo env.BUILD_NUMBER
-       echo env.BRANCH_NAME   
+       echo env.BRANCH_NAME
+       echo "version  ${env.NEW_VERSION}"  
         git branch: 'main', url: 'https://github.com/nilesh44/coffee-customer.git'
         }
    }
