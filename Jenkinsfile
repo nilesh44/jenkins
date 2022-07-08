@@ -44,7 +44,7 @@ pipeline {
        echo env.BRANCH_NAME
           
        echo "version  ${env.NEW_VERSION}"  
-        git branch:  ${params.BRANCH} , url: Env ${params.URL}
+        git branch: ${params.BRANCH} , url:  ${params.URL}
         }
    }
    
