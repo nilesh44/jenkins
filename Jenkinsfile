@@ -3,13 +3,13 @@ pipeline {
   agent any 
   
   //declearing user defined environment veriable
-  properties([
-      parameters([
-        string(description: 'git repo url', name: 'url', trim: true), 
-        choice(choices: ['dev,prod,QA'], description: 'environment', name: 'select env'),
-        string(description: 'branch of git repo', name: 'branch', trim: true)
-      ])
-    ])
+ parameters {
+    choice(
+      name: 'Env',
+      choices: ['DEV', 'QA', 'UAT', 'PROD'],
+      description: 'Passing the Environment'
+    )
+  }
                
   environment {
    NEW_VERSION = '1.0.1-SNAPSHOT' 
@@ -21,10 +21,8 @@ pipeline {
         steps{
        echo "stage1"
           
-                echo "url ${params.url}"
-                echo "branch: ${params.branch }"
-
-                echo "environment: ${params.environment}"
+                echo "Env ${params.Env}"
+               
 
           
        // this environment veriable is provide by jenkins
