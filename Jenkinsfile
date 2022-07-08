@@ -26,20 +26,21 @@ pipeline {
           defaultValue: '', 
           description: 'sonar-project-key',
           trim: true)
-string(
+   
+   string(
           name: 'sonar-url', 
           defaultValue: 'http://localhost:9000', 
           description: 'sonar-url',
           trim: true)
         
-  }
+  
   string(
           name: 'sonar-username', 
           defaultValue: 'admin', 
           description: 'sonar-username',
           trim: true)
         
-  }
+  
 string(
           name: 'sonar-password', 
           defaultValue: 'http://localhost:9000', 
