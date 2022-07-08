@@ -8,7 +8,18 @@ pipeline {
       name: 'Env',
       choices: ['DEV', 'QA', 'UAT', 'PROD'],
       description: 'Passing the Environment'
-    )
+    ),
+       string(
+         name: 'URL', 
+         defaultValue: '', 
+         description: 'url of git repo'),
+
+        string(
+          name: 'BRANCH', 
+          defaultValue: '', 
+          description: 'branch')
+
+        
   }
                
   environment {
@@ -22,8 +33,8 @@ pipeline {
        echo "stage1"
           
                 echo "Env ${params.Env}"
-               
-
+               echo "Env ${params.URL}"
+               echo "Env ${params.BRANCH}"
           
        // this environment veriable is provide by jenkins
           //we can check at http://localhost:8080/env-vars.html/
