@@ -3,19 +3,13 @@ pipeline {
   agent any 
   
   //declearing user defined environment veriable
-   parameters {
-        string(name: 'yyyyy', defaultValue: 'XXX', description: 'Hello world')
-
-        text(name: 'Demo', defaultValue: '', description: 'Demo parameter')
-
-        booleanParam(name: 'Boolean', defaultValue: true, description: 'Boolean value')
-
-        choice(name: 'CHOICE', choices: ['A', 'B', 'C'], description: ‘Choose one')
-
-        //password(name: 'PASSWORD', defaultValue: 'Key', description: 'Enter a password')
-
-        //file(name: "FILE", description: "file to upload")
-    }
+  properties([
+      parameters([
+        string(description: 'git repo url', name: 'url', trim: true), 
+        choice(choices: ['dev,prod,QA'], description: 'environment', name: 'select env'),
+        string(description: 'branch of git repo', name: 'branch', trim: true)
+      ])
+    ])
                
   environment {
    NEW_VERSION = '1.0.1-SNAPSHOT' 
@@ -27,15 +21,11 @@ pipeline {
         steps{
        echo "stage1"
           
-                echo "Hello ${params.yyyyy}"
+                echo "url ${params.url}"
+                echo "branch: ${params.branch }"
 
-                echo "Biography: ${params.Demo}"
+                echo "environment: ${params.environment}"
 
-                echo "Toggle: ${params.Boolean }"
-
-                echo "Choice: ${params.CHOICE}"
-
-               // echo "Password: ${params.PASSWORD}"
           
        // this environment veriable is provide by jenkins
           //we can check at http://localhost:8080/env-vars.html/
