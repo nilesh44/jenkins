@@ -12,12 +12,14 @@ pipeline {
        string(
          name: 'URL', 
          defaultValue: '', 
-         description: 'url of git repo')
+         description: 'url of git repo',
+         trim: true)
 
         string(
           name: 'BRANCH', 
           defaultValue: '', 
-          description: 'branch')
+          description: 'branch',
+          trim: true)
 
         
   }
@@ -42,7 +44,7 @@ pipeline {
        echo env.BRANCH_NAME
           
        echo "version  ${env.NEW_VERSION}"  
-        git branch: 'main', url: 'https://github.com/nilesh44/coffee-customer.git'
+        git branch:  ${params.BRANCH} , url: Env ${params.URL}
         }
    }
    
