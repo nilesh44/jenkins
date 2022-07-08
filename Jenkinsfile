@@ -20,7 +20,31 @@ pipeline {
           defaultValue: '', 
           description: 'branch',
           trim: true)
-
+   
+   string(
+          name: 'sonar-project-key', 
+          defaultValue: '', 
+          description: 'sonar-project-key',
+          trim: true)
+string(
+          name: 'sonar-url', 
+          defaultValue: 'http://localhost:9000', 
+          description: 'sonar-url',
+          trim: true)
+        
+  }
+  string(
+          name: 'sonar-username', 
+          defaultValue: 'admin', 
+          description: 'sonar-username',
+          trim: true)
+        
+  }
+string(
+          name: 'sonar-password', 
+          defaultValue: 'http://localhost:9000', 
+          description: 'admin4',
+          trim: true)
         
   }
                
@@ -52,6 +76,13 @@ pipeline {
      steps{
        
             bat 'gradlew.bat clean build'
+           
+   } 
+   }
+    stage("sonarqube"){
+     steps{
+       
+            bat "gradlew.bat sonarqube -Dsonar.projectKey=${params.sonar-project-key} -Dsonar.host.url=${params.sonar-url} -Dsonar.login=${params.sonar-username} -Dsonar.password=${params.sonar-password}"
            
    } 
    }
