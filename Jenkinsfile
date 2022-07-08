@@ -12,9 +12,9 @@ pipeline {
 
         choice(name: 'CHOICE', choices: ['A', 'B', 'C'], description: ‘Choose one')
 
-        password(name: 'PASSWORD', defaultValue: 'Key', description: 'Enter a password')
+        //password(name: 'PASSWORD', defaultValue: 'Key', description: 'Enter a password')
 
-        file(name: "FILE", description: "file to upload")
+        //file(name: "FILE", description: "file to upload")
     }
                
   environment {
@@ -35,7 +35,7 @@ pipeline {
 
                 echo "Choice: ${params.CHOICE}"
 
-                echo "Password: ${params.PASSWORD}"
+               // echo "Password: ${params.PASSWORD}"
           
        // this environment veriable is provide by jenkins
           //we can check at http://localhost:8080/env-vars.html/
