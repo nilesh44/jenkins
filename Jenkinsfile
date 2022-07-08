@@ -8,11 +8,11 @@ pipeline {
       name: 'Env',
       choices: ['DEV', 'QA', 'UAT', 'PROD'],
       description: 'Passing the Environment'
-    ),
+    )
        string(
          name: 'URL', 
          defaultValue: '', 
-         description: 'url of git repo'),
+         description: 'url of git repo')
 
         string(
           name: 'BRANCH', 
