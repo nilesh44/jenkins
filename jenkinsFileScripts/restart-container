@@ -57,7 +57,7 @@ pipeline {
         
         echo 'list all running or non running container detail'
         sshagent(['ubuntu']) {
-             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'sudo docker ps' "
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'sudo docker container ls -a' "
             
                
         } 
