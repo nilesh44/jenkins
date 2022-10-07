@@ -1,0 +1,62 @@
+pipeline {
+
+  agent any 
+  
+  //declearing user defined environment veriable
+ parameters {
+    
+       string(
+         name: 'ADDRESS', 
+         defaultValue: '', 
+         description: 'url of Address',
+         trim: true)
+         
+       string(
+         name: 'CONTAINERID', 
+         defaultValue: '', 
+         description: 'container name or id',
+         trim: true)
+
+
+
+ 
+        
+  }
+               
+  environment {
+   NEW_VERSION = '1.0.1-SNAPSHOT' 
+  }
+  
+  stages{
+    stage("tomcat"){
+     steps{
+         sh 'pwd'
+        sshagent(['ubuntu']) {
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'uname -a;ls -a;pwd;docker --version;sudo docker container restart ${params.CONTAINERID};docker ps' "
+             //sh "ssh -tt ubuntu ec2-3-110-171-52.ap-south-1.compute.amazonaws.com 'pwd;ls -a;docker --version'"
+               
+        }     
+}
+   }
+     
+  }
+  
+  //this will execute after completion of all stages
+  post{
+   
+    //this block will always execute
+    always{
+      echo "always execute"
+    }
+    //this block will execute on failure
+    failure{
+     echo "something has failed" 
+    }
+    
+    //this block will execute on success
+    success{
+     echo "build successfull"  
+    }
+  }
+  
+}
