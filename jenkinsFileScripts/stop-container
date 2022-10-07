@@ -41,7 +41,7 @@ pipeline {
         echo 'get-running-container-detail'
         sshagent(['ubuntu']) {
              sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'sudo docker ps' "
-             //sh "ssh -tt ubuntu ec2-3-110-171-52.ap-south-1.compute.amazonaws.com 'pwd;ls -a;docker --version'"
+           
                
         }  
          echo '---------------------------------------------------------------------------------'
