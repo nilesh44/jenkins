@@ -16,10 +16,6 @@ pipeline {
          defaultValue: '', 
          description: 'container name or id',
          trim: true)
-
-
-
- 
         
   }
                
@@ -28,7 +24,7 @@ pipeline {
   }
   
   stages{
-    stage("tomcat"){
+    stage("stop-container"){
      steps{
          sh 'pwd'
         sshagent(['ubuntu']) {
@@ -36,6 +32,44 @@ pipeline {
              //sh "ssh -tt ubuntu ec2-3-110-171-52.ap-south-1.compute.amazonaws.com 'pwd;ls -a;docker --version'"
                
         }     
+}
+   }
+   
+    stage("get-running-container-detail"){
+     steps{
+        
+        echo 'get-running-container-detail'
+        sshagent(['ubuntu']) {
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'sudo docker ps' "
+             //sh "ssh -tt ubuntu ec2-3-110-171-52.ap-south-1.compute.amazonaws.com 'pwd;ls -a;docker --version'"
+               
+        }  
+         echo '---------------------------------------------------------------------------------'
+}
+   }
+   
+    stage("list all running or non running container detail"){
+     steps{
+        
+        echo 'list all running or non running container detail'
+        sshagent(['ubuntu']) {
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'sudo docker ps' "
+            
+               
+        } 
+         echo '---------------------------------------------------------------------------------'
+}
+   }
+   
+    stage("get-all-images"){
+     steps{
+        
+        echo 'list all images'
+        sshagent(['ubuntu']) {
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'sudo docker images' "
+                          
+        } 
+         echo '---------------------------------------------------------------------------------'
 }
    }
      
