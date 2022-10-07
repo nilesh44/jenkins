@@ -28,7 +28,8 @@ pipeline {
   }
   
   stages{
-    stage("tomcat"){
+    stage("restart-container"){
+    echo 'restart-container'
      steps{
          sh 'pwd'
         sshagent(['ubuntu']) {
@@ -37,6 +38,7 @@ pipeline {
                
         }     
 }
+  echo '---------------------------------------------------------------------------------'
    }
  
      stage("get-running-container-detail"){
