@@ -22,10 +22,10 @@ pipeline {
  
   
   stages{
-    stage("restart-container"){
+    stage("delete-container"){
     
      steps{
-     echo 'restart-container'
+     echo 'delete-container'
          sh 'pwd'
         sshagent(['ubuntu']) {
              sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'uname -a;ls -a;pwd;docker --version;sudo docker container rm ${params.CONTAINERID}' "         
