@@ -1,0 +1,96 @@
+pipeline {
+
+  agent any 
+  
+  //declearing user defined environment veriable
+ parameters {
+    
+       string(
+         name: 'ADDRESS', 
+         defaultValue: '', 
+         description: 'url of Address',
+         trim: true)
+         
+       string(
+         name: 'CONTAINERID', 
+         defaultValue: '', 
+         description: 'container name or id',
+         trim: true)
+        
+  }
+               
+ 
+  
+  stages{
+    stage("restart-container"){
+    
+     steps{
+     echo 'restart-container'
+         sh 'pwd'
+        sshagent(['ubuntu']) {
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'uname -a;ls -a;pwd;docker --version;sudo docker container rm ${params.CONTAINERID}' "         
+        }    
+        echo '---------------------------------------------------------------------------------'
+}
+  
+   }
+ 
+     stage("get-all-running-containers"){
+     steps{
+        
+        echo 'get-running-container-detail'
+        sshagent(['ubuntu']) {
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'sudo docker ps' "
+           
+               
+        }  
+         echo '---------------------------------------------------------------------------------'
+}
+   }
+   
+    stage("list all running or non running container detail"){
+     steps{
+        
+        echo 'list all running or non running container detail'
+        sshagent(['ubuntu']) {
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'sudo docker container ls -a' "
+            
+               
+        } 
+         echo '---------------------------------------------------------------------------------'
+}
+   }
+   
+    stage("get-all-images"){
+     steps{
+        
+        echo 'list all images'
+        sshagent(['ubuntu']) {
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'sudo docker images' "
+                          
+        } 
+         echo '---------------------------------------------------------------------------------'
+}
+   }
+ 
+  }
+  
+  //this will execute after completion of all stages
+  post{
+   
+    //this block will always execute
+    always{
+      echo "always execute"
+    }
+    //this block will execute on failure
+    failure{
+     echo "something has failed" 
+    }
+    
+    //this block will execute on success
+    success{
+     echo "build successfull"  
+    }
+  }
+  
+}
