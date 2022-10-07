@@ -32,7 +32,7 @@ pipeline {
      steps{
          sh 'pwd'
         sshagent(['ubuntu']) {
-             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'uname -a;ls -a;pwd;docker --version;sudo docker container restart ${params.CONTAINERID};docker ps' "
+             sh "ssh -o StrictHostKeyChecking=no -l ubuntu ${params.ADDRESS} 'uname -a;ls -a;pwd;docker --version;sudo docker container restart ${params.CONTAINERID};sudo docker ps' "
              //sh "ssh -tt ubuntu ec2-3-110-171-52.ap-south-1.compute.amazonaws.com 'pwd;ls -a;docker --version'"
                
         }     
